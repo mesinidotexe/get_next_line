@@ -15,30 +15,33 @@
 char	*get_next_line(int fd)
 {
 	static char	buffer[BUFFER_SIZE + 1];
-	int		reads;
-	char	*str;
+	char		*line;
+	int			bytes_read;
 
-	reads = 1;
-	if (fd < 0 || fd >= FOPEN_MAX)
+	line = NULL;
+	if (fd < 0 || fd >= FOPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
-	while (1)
+	while (!line_chr(line))
 	{
-		reads = read(fd, buffer, BUFFER_SIZE);
-		if (reads < 0)
-			return (NULL);
-		if (!reads)
-			return (NULL);
-		// if (read == '\n')
-		// 	break;
-		printf("%s\n", buffer);
+		if (buffer[0] == '\0')
+		{
+			bytes_read = read(fd, buffer, BUFFER_SIZE);
+		}
+		line = gnl_join(line, buffer);
+		return (line);
 	}
-	buffer[BUFFER_SIZE] = '\0';
-	printf("buffer : %s\n", buffer);
+	return (line);
 }
-int main()
+
+int	main(void)
 {
-	int	fd;
+	int		fd;
 
 	fd = open("a.txt", O_RDONLY);
-	get_next_line(fd);
+	return (0);
 }
+
+// if (bytes_read < 0)
+// 	return (free(line), NULL);
+// if (bytes_read == 0)
+// 	return (line);
