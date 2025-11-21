@@ -32,24 +32,30 @@ char	*get_next_line(int fd)
 				return (line);
 		}
 		line = gnl_join(line, buffer);
-		if(!line)
-			return(NULL);
+		if (!line)
+			return (NULL);
 		cleanbuff(buffer);
 	}
 	return (line);
 }
 
-int	main(void)
+/* int	main(void)
 {
 	int		fd;
 	char	*line;
 
 	fd = open("teste.txt", O_RDONLY);
 	line = get_next_line(fd);
+	printf(">%s<", line);
 	free(line);
-
 	line = get_next_line(fd);
+	printf(">%s<", line);
 	free(line);
-	printf("%s\n", line);
+	line = get_next_line(fd);
+	printf(">%s<", line);
+	free(line);
+	line = get_next_line(fd);
+	printf(">%s<", line);
+	free(line);
 	return (0);
-}
+} */

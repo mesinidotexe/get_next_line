@@ -8,9 +8,13 @@ size_t	line_len(char *s)
 	if (!s)
 		return (0);
 	while (s[i] && s[i] != '\n')
+	{
 		i++;
+	}
 	if (s[i] == '\n')
+	{
 		i++;
+	}
 	return (i);
 }
 size_t	line_chr(char *s)
@@ -22,10 +26,10 @@ size_t	line_chr(char *s)
 		return (0);
 	while (s[i] && s[i] != '\n')
 	{
-		if (s[i] == '\n')
-			return (1);
 		i++;
 	}
+	if (s[i] == '\n')
+		return (1);
 	return (0);
 }
 
@@ -36,11 +40,11 @@ void	cleanbuff(char *buffer)
 
 	i = 0;
 	j = 0;
-	while(buffer[i] && buffer[i] != '\n')
+	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	if (i == '\n')
+	if (buffer[i] == '\n')
 		i++;
-	while(buffer[i])
+	while (buffer[i])
 	{
 		buffer[j] = buffer[i];
 		i++;
