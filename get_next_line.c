@@ -19,16 +19,22 @@ char	*get_next_line(int fd)
 	int			bytes_read;
 
 	line = NULL;
-	if (fd < 0 || fd >= FOPEN_MAX || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	while (!line_chr(line))
 	{
 		if (buffer[0] == '\0')
 		{
 			bytes_read = read(fd, buffer, BUFFER_SIZE);
+			if (bytes_read < 0)
+				return (free(line), NULL);
+			if (bytes_read == 0)
+				return (line);
 		}
 		line = gnl_join(line, buffer);
-		return (line);
+		if(!line)
+			return(NULL);
+		cleanbuff(buffer);
 	}
 	return (line);
 }
@@ -36,12 +42,14 @@ char	*get_next_line(int fd)
 int	main(void)
 {
 	int		fd;
+	char	*line;
 
-	fd = open("a.txt", O_RDONLY);
+	fd = open("teste.txt", O_RDONLY);
+	line = get_next_line(fd);
+	free(line);
+
+	line = get_next_line(fd);
+	free(line);
+	printf("%s\n", line);
 	return (0);
 }
-
-// if (bytes_read < 0)
-// 	return (free(line), NULL);
-// if (bytes_read == 0)
-// 	return (line);
