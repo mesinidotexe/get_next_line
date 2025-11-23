@@ -39,7 +39,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-int	main(void)
+/* int	main(void)
 {
 	int		fd;
 	char	*line;
@@ -58,4 +58,4 @@ int	main(void)
 	printf(">%s<", line);
 	free(line);
 	return (0);
-}
+} */
