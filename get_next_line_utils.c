@@ -57,15 +57,17 @@ void	cleanbuff(char *buffer)
 		i++;
 	if (buffer[i] == '\n')
 		i++;
-	if (!buffer[i])
-		buffer[j] = '\0';
 	while (buffer[i])
 	{
 		buffer[j] = buffer[i];
 		i++;
 		j++;
 	}
-	buffer[j] = '\0';
+	while (j < BUFFER_SIZE)
+	{
+		buffer[j] = '\0';
+		j++;
+	}
 }
 
 char	*gnl_join(char *s1, char *buffer)
