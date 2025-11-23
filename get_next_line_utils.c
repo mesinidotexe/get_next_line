@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vmesini- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/23 17:00:34 by vmesini-          #+#    #+#             */
+/*   Updated: 2025/11/23 17:00:36 by vmesini-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 size_t	line_len(char *s)
@@ -17,6 +29,7 @@ size_t	line_len(char *s)
 	}
 	return (i);
 }
+
 size_t	line_chr(char *s)
 {
 	size_t	i;
@@ -44,6 +57,8 @@ void	cleanbuff(char *buffer)
 		i++;
 	if (buffer[i] == '\n')
 		i++;
+	if (!buffer[i])
+		buffer[j] = '\0';
 	while (buffer[i])
 	{
 		buffer[j] = buffer[i];
@@ -64,7 +79,7 @@ char	*gnl_join(char *s1, char *buffer)
 	newstr = malloc(line_len(s1) + line_len(buffer) + 1);
 	if (!newstr)
 		return (NULL);
-	while (s1 && s1[i] != '\0' && i < line_len(s1))
+	while (s1 && s1[i])
 	{
 		newstr[i] = s1[i];
 		i++;

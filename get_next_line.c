@@ -23,7 +23,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	while (!line_chr(line))
 	{
-		if (buffer[0] == '\0')
+		if (buffer[0] == 0)
 		{
 			bytes_read = read(fd, buffer, BUFFER_SIZE);
 			if (bytes_read < 0)
@@ -39,7 +39,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-/* int	main(void)
+int	main(void)
 {
 	int		fd;
 	char	*line;
@@ -58,4 +58,4 @@ char	*get_next_line(int fd)
 	printf(">%s<", line);
 	free(line);
 	return (0);
-} */
+}
